@@ -1,0 +1,46 @@
+{
+    "enabled" : true,
+    "debugSpawnChanceMessages":false,
+    "bossesMultiplier":{
+        "bigmap":[
+            {"name":"bossKnight","multiplier":0.5},
+            {"name":"bossBully","multiplier":1},
+            {"name":"sectantPriest","multiplier":0.5}
+        ],
+        "factory4_day":[
+            {"name":"bossTagilla","multiplier":1}
+        ],
+        "factory4_night":[
+            {"name":"bossTagilla","multiplier":0.5},
+            {"name":"sectantPriest","multiplier":0.5}
+        ],
+        "interchange":[
+            {"name":"bossKilla","multiplier":1}
+        ],
+        "lighthouse":[
+            {"name":"bossKnight","multiplier":0.5}
+        ],
+        "rezervbase":[
+            {"name":"bossGluhar","multiplier":1}
+        ],
+        "sandbox_high":[
+            {"name":"bossKolontay","multiplier":1},
+            {"name":"sectantPriest","multiplier":1}
+        ],
+        "shoreline":[
+            {"name":"bossKnight","multiplier":0.5},
+            {"name":"bossSanitar","multiplier":1},
+            {"name":"sectantPriest","multiplier":0.5}
+        ],
+        "tarkovstreets":[
+            {"name":"bossKolontay","multiplier":1},
+            {"name":"bossBoar","multiplier":1}
+        ],
+        "woods":[
+            {"name":"bossKnight","multiplier":0.5},
+            {"name":"bossKojaniy","multiplier":1},
+            {"name":"sectantPriest","multiplier":0.5}
+        ]
+    }
+
+}
