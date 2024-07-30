@@ -1,0 +1,56 @@
+{
+    "advancedEnabled":false,
+    "sigmoidFunctionParameters":{
+        "MaxSpawnPercentage":100,
+        "QuarterPercentLevelSpreadSigmoid": 8,
+        "levelToHaveHalfPercentSpawnChance":35
+    },
+    "defaultSpawnChances":{
+        "bigmap":{
+            "skier":4,
+            "bossKnight": 35,
+            "bossBully":35,
+            "sectantPriest": 20,
+            "arenaFighterEvent": 5
+        },
+        "factory4_day":{
+            "bossTagilla":35
+        },
+        "factory4_night":{
+            "bossTagilla":35,
+            "sectantPriest":2
+        },
+        "interchange":{
+            "bossKilla":35
+        },
+        "lighthouse":{
+            "bossZryachiy":100,
+            "bossKnight": 37,
+            "crazyAssaultEvent":5
+        },
+        "rezervbase":{
+            "bossGluhar":35
+        },
+        "sandbox_high":{
+            "bossKolontay":45,
+            "sectantPriest":44
+        },
+        "shoreline":{
+            "peacemaker":15,
+            "bossKnight":37,
+            "bossSanitar":37,
+            "sectantPriest":20
+        },
+        "tarkovstreets":{
+            "bossKolontay":37,
+            "bossBoar":37,
+            "bossBoarSniper":100
+        },
+        "woods":{
+            "bossKnight":37,
+            "bossKojaniy":37,
+            "sectantPriest":20,
+            "arenaFighterEvent":5
+        }
+    }
+}
