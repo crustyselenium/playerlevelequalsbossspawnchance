@@ -1,7 +1,7 @@
 {
     "name": "PlayerLevelEqualsBossSpawnChance",
-    "version": "1.0.0",
-    "sptVersion": "3.9.X",
+    "version": "1.2.0",
+    "sptVersion": "3.10.X",
     "loadBefore": [],
     "loadAfter": [],
     "incompatibilities": [],

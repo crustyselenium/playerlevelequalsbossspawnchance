@@ -3,6 +3,9 @@
     "debugSpawnChanceMessages":false,
     "bossesMultiplier":{
         "bigmap":[
+            {"name":"skier", "multiplier":0.1, "enabled":false},
+            {"name":"arenaFighterEvent", "multiplier":0.1, "enabled":false},
+            {"name":"bossPartisan", "multiplier":0.5, "enabled":true},
             {"name":"bossKnight", "multiplier":0.5, "enabled":true},
             {"name":"bossBully", "multiplier":1, "enabled":true},
             {"name":"sectantPriest", "multiplier":0.5, "enabled":true}
@@ -18,7 +21,10 @@
             {"name":"bossKilla", "multiplier":1, "enabled":true}
         ],
         "lighthouse":[
-            {"name":"bossKnight", "multiplier":0.5, "enabled":true}
+            {"name":"bossZryachiy", "multiplier":1, "enabled":false},
+            {"name":"bossKnight", "multiplier":0.5, "enabled":true},
+            {"name":"crazyAssaultEvent", "multiplier":0.1, "enabled":false},
+            {"name":"bossPartisan", "multiplier":0.5, "enabled":true}
         ],
         "rezervbase":[
             {"name":"bossGluhar", "multiplier":1, "enabled":true}
@@ -28,17 +34,22 @@
             {"name":"sectantPriest", "multiplier":1, "enabled":true}
         ],
         "shoreline":[
+            {"name":"peacemaker", "multiplier":0.1, "enabled":false},
+            {"name":"bossPartisan", "multiplier":0.5, "enabled":true},
             {"name":"bossKnight", "multiplier":0.5, "enabled":true},
             {"name":"bossSanitar", "multiplier":1, "enabled":true},
             {"name":"sectantPriest", "multiplier":0.5, "enabled":true}
         ],
         "tarkovstreets":[
-            {"name":"bossKolontay", "multiplier":1, "enabled":true},
-            {"name":"bossBoar", "multiplier":1, "enabled":true}
+            {"name":"bossKolontay", "multiplier":0.75, "enabled":true},
+            {"name":"bossBoarSniper", "multiplier":1, "enabled":false},
+            {"name":"bossBoar", "multiplier":0.75, "enabled":true}
         ],
         "woods":[
             {"name":"bossKnight", "multiplier":0.5, "enabled":true},
             {"name":"bossKojaniy", "multiplier":1, "enabled":true},
+            {"name":"bossPartisan", "multiplier":0.5, "enabled":true},
+            {"name":"arenaFighterEvent", "multiplier":0.1, "enabled":false},
             {"name":"sectantPriest", "multiplier":0.5, "enabled":true}
         ]
     }

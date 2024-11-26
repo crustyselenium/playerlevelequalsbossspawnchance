@@ -44,8 +44,7 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
         }
         if (this.modConfig.enabled && presptModLoader.getImportedModsNames().includes("PreyToLive-BetterSpawnsPlus")) 
         {
-            this.logger.log("[Lvl=Boss] INCOMPATIBLE MOD DETECTED: Better Spawns Plus. DISABLING [Lvl=Boss] FUNCTION", "red");
-            this.modConfig.enabled = false;
+            this.logger.log("[Lvl=Boss] SEMI-INCOMPATIBLE MOD DETECTED: Better Spawns Plus. ENSURE BSP ISN'T CONFIGURED TO OVERRIDE BOSS SPAWN CHANCES", "red");
         }
 
 
@@ -57,27 +56,26 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                 "StaticUpdateBossChance",
                 [
                     {
-                        // update on raid end
-                        url: "/client/match/offline/end",
-                        action: (url:string, info:any, sessionId:string, output:string) =>
+                        // update on open of map screen
+                        url: "/client/locations",
+                        action: async (url:string, info:any, sessionId:string, output:string) =>
                         {
                             const currentProfile : IPmcData = this.profileHelper.getPmcProfile(sessionId);
                             this.updateBossSpawnChance(currentProfile);
-                            this.logger.log("[Lvl=Boss] Boss spawn chances updated", "white");
                             return output;
                         }
                     },{
                         // update on client game start
                         url: "/client/game/start",
-                        action: (url:string, info:any, sessionId:string, output:string) =>
+                        action: async (url:string, info:any, sessionId:string, output:string) =>
                         {
                             const currentProfile : IPmcData = this.profileHelper.getPmcProfile(sessionId);
                             this.updateBossSpawnChance(currentProfile);
-                            this.logger.log("[Lvl=Boss] Boss spawn chances updated", "white");
+                            this.logger.log("[Lvl=Boss] Boss spawn chances updated, and will update before every raid.", "white");
                             return output;
                         }
                     }
-                ], "aki"
+                ], "spt"
             );
         }
     }
@@ -91,7 +89,6 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
             const maxChance = this.advancedConfig.sigmoidFunctionParameters.MaxSpawnPercentage;
             const halfChance = this.advancedConfig.sigmoidFunctionParameters.levelToHaveHalfPercentSpawnChance;
             const sigmoidRightLeft = halfChance / sigmoidSpread;
-            // god i hate this
             return (maxChance / (1 + Math.E ** -((playerLevel/sigmoidSpread)-sigmoidRightLeft)));
         }
         return playerLevel;
@@ -101,6 +98,7 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
     {
         //get player level, default to 1 if it's undefined
         //for math it's rounded up, then maxed out at 100
+        // Chance / 1000^0.2 = actual spawn chance. PARTIZAN
         const level = this.calculatePMCLevel(profile);
         const debugMessage = this.modConfig.debugSpawnChanceMessages;
         //Customs
@@ -114,7 +112,14 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                     {
                         this.logger.log(`Customs: ${mapBoss.BossName} changed ${mapBoss.BossChance} => ${Math.min(Math.ceil(level * boss.multiplier), 100)}`,"blue");
                     }
-                    mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    if (mapBoss.BossName === "bossPartisan")
+                    {
+                        mapBoss.BossChance = Math.ceil(level * boss.multiplier * 3.9811);
+                    } 
+                    else 
+                    {
+                        mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    }
                 }
             }
         }
@@ -130,7 +135,14 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                     {
                         this.logger.log(`Day Factory: ${mapBoss.BossName} changed ${mapBoss.BossChance} => ${Math.min(Math.ceil(level * boss.multiplier), 100)}`,"blue");
                     }
-                    mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    if (mapBoss.BossName === "bossPartisan")
+                    {
+                        mapBoss.BossChance = Math.ceil(level * boss.multiplier * 3.9811);
+                    } 
+                    else 
+                    {
+                        mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    }
                 }
             }
         }
@@ -145,7 +157,14 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                     {
                         this.logger.log(`Night Factory: ${mapBoss.BossName} changed ${mapBoss.BossChance} => ${Math.min(Math.ceil(level * boss.multiplier), 100)}`,"blue");
                     }
-                    mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    if (mapBoss.BossName === "bossPartisan")
+                    {
+                        mapBoss.BossChance = Math.ceil(level * boss.multiplier * 3.9811);
+                    } 
+                    else 
+                    {
+                        mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    }
                 }
             }
         }
@@ -161,7 +180,14 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                     {
                         this.logger.log(`Interchange: ${mapBoss.BossName} changed ${mapBoss.BossChance} => ${Math.min(Math.ceil(level * boss.multiplier), 100)}`,"blue");
                     }
-                    mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    if (mapBoss.BossName === "bossPartisan")
+                    {
+                        mapBoss.BossChance = Math.ceil(level * boss.multiplier * 3.9811);
+                    } 
+                    else 
+                    {
+                        mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    }
                 }
             }
         }
@@ -177,7 +203,14 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                     {
                         this.logger.log(`Lighthouse: ${mapBoss.BossName} changed ${mapBoss.BossChance} => ${Math.min(Math.ceil(level * boss.multiplier), 100)}`,"blue");
                     }
-                    mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    if (mapBoss.BossName === "bossPartisan")
+                    {
+                        mapBoss.BossChance = Math.ceil(level * boss.multiplier * 3.9811);
+                    } 
+                    else 
+                    {
+                        mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    }
                 }
             }
         }
@@ -193,7 +226,14 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                     {
                         this.logger.log(`Reserve: ${mapBoss.BossName} changed ${mapBoss.BossChance} => ${Math.min(Math.ceil(level * boss.multiplier), 100)}`,"blue");
                     }
-                    mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    if (mapBoss.BossName === "bossPartisan")
+                    {
+                        mapBoss.BossChance = Math.ceil(level * boss.multiplier * 3.9811);
+                    } 
+                    else 
+                    {
+                        mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    }
                 }
             }
         }
@@ -209,7 +249,14 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                     {
                         this.logger.log(`>20lvl Ground Zero: ${mapBoss.BossName} changed ${mapBoss.BossChance} => ${Math.min(Math.ceil(level * boss.multiplier), 100)}`,"blue");
                     }
-                    mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    if (mapBoss.BossName === "bossPartisan")
+                    {
+                        mapBoss.BossChance = Math.ceil(level * boss.multiplier * 3.9811);
+                    } 
+                    else 
+                    {
+                        mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    }
                 }
             }
         }
@@ -225,7 +272,14 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                     {
                         this.logger.log(`Shoreline: ${mapBoss.BossName} changed ${mapBoss.BossChance} => ${Math.min(Math.ceil(level * boss.multiplier), 100)}`,"blue");
                     }
-                    mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    if (mapBoss.BossName === "bossPartisan")
+                    {
+                        mapBoss.BossChance = Math.ceil(level * boss.multiplier * 3.9811);
+                    } 
+                    else 
+                    {
+                        mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    }
                 }
             }
         }
@@ -241,7 +295,14 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                     {
                         this.logger.log(`Streets: ${mapBoss.BossName} changed ${mapBoss.BossChance} => ${Math.min(Math.ceil(level * boss.multiplier), 100)}`,"blue");
                     }
-                    mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    if (mapBoss.BossName === "bossPartisan")
+                    {
+                        mapBoss.BossChance = Math.ceil(level * boss.multiplier * 3.9811);
+                    } 
+                    else 
+                    {
+                        mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    }
                 }
             }
         }
@@ -257,7 +318,14 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                     {
                         this.logger.log(`Woods: ${mapBoss.BossName} changed ${mapBoss.BossChance} => ${Math.min(Math.ceil(level * boss.multiplier), 100)}`,"blue");
                     }
-                    mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    if (mapBoss.BossName === "bossPartisan")
+                    {
+                        mapBoss.BossChance = Math.ceil(level * boss.multiplier * 3.9811);
+                    } 
+                    else 
+                    {
+                        mapBoss.BossChance = Math.min(Math.ceil(level * boss.multiplier), 100);
+                    }
                 }
             }
         }
